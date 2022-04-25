@@ -15,3 +15,9 @@ end
 get '/new_posts' do
 	erb :newposts
 end
+
+post '/new_posts' do
+	new = params[:new_post]
+	
+	erb "You Typed: #{new}"
+end
