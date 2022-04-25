@@ -57,6 +57,9 @@ post '/new_posts' do
 	redirect to '/posts'
 end
 
-get '/posts/' do
-
+get '/posts/:post_id' do
+	post_id = params[:post_id]
+	
+	@details = @db.execute 'Select * from Posts WHERE id=?', [post_id]
+	erb :details
 end
