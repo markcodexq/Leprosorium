@@ -81,6 +81,7 @@ end
 post '/details/:post_id' do
 	post_id = params[:post_id]
 	content = params[:details_comments]
-	@db.execute ''
-	erb "You Typed #{content} from #{post_id}"
+	@db.execute 'insert into comments(content, post_id, created_date)
+	values(?, ?, datetime())', [content, post_id]
+	redirect to ('/details/' + post_id)
 end
