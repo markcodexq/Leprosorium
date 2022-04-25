@@ -58,8 +58,11 @@ post '/new_posts' do
 end
 
 get '/posts/:post_id' do
+	# получаем переменную из URL
 	post_id = params[:post_id]
-	
-	@details = @db.execute 'Select * from Posts WHERE id=?', [post_id]
+	# Получаем один пост с помощью id
+	details = @db.execute 'Select * from Posts WHERE id=?', [post_id]
+	# В массиве который получили выбираем первый элемент с хешем
+	@row = details[0]
 	erb :details
 end
