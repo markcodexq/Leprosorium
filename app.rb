@@ -56,3 +56,7 @@ post '/new_posts' do
 	values(?, datetime());', [new]
 	redirect to '/posts'
 end
+
+get '/posts/' do
+
+end
