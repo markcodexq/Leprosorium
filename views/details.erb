@@ -9,6 +9,14 @@
 
 <h4>Comments: </h4>
 
+<p>
+    <% @get_comments.each do |comment|%>
+       <span style="font-size: 75%; color: red;"><%=comment['content']%></span>
+        <br>
+        <%=comment['created_date']%>
+    <%end%>
+</p>
+
 <form method="POST" action="/details/<%=@row['id']%>">
   <div class="form-floating">
     <textarea name="details_comments" class="form-control" placeholder="Leave the comments here" id="floatingTextarea2" style="height: 100px"></textarea>
@@ -17,10 +25,3 @@
   <button type="submit" class="btn btn-primary">Add comment</button>
 </form>
 <br>
-<p>
-    <% @get_comments.each do |comment|%>
-        <%=comment['content']%>
-        <br>
-        <%=comment['created_date']%>
-    <%end%>
-</p>
