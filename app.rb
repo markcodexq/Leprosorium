@@ -54,6 +54,5 @@ post '/new_posts' do
 	(content, created_date) 
 	
 	values(?, datetime());', [new]
-	
-	erb "You Typed: #{new}"
+	redirect to '/posts'
 end
