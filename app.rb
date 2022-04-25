@@ -34,7 +34,7 @@ get '/' do
 end
 
 get '/posts' do
-	@result = @db.execute 'Select * from Posts'
+	@result = @db.execute 'Select * from Posts order by id desc'
 	erb :posts
 end
 

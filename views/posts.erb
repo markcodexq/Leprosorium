@@ -1,3 +1,10 @@
 <h2>Hello posts</h2>
 
-<p><%=@result%></p>
+<% @result.each do |post|%>
+    <p>
+        <%=post['content']%>
+        <br>
+        <%=post['created_date']%>
+    </p>
+    <br>
+<%end%>
