@@ -4,17 +4,22 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+# Initialize database
 def init_db()
 	@db = SQLite3::Database.new 'leprosorium.db'
 	@db.results_as_hash = true
 end
+# Before вызывается каждый раз при перезагрузке любой страницы
 
 before do
 	init_db()
 end
 
+# Вызывается каждый раз при конфигурации приложения 
+# И когда изменился код программы и перезагрузилась страница
 configure do
 	init_db()
+	# Создает таблицу если таблицы не сущетсвует
 	@db.execute 'CREATE TABLE IF NOT EXISTS 
 	Posts
 	(
@@ -37,7 +42,11 @@ get '/new_posts' do
 end
 
 post '/new_posts' do
-	@new = params[:new_post]
+	new = params[:new_post]
 	
-	erb "You Typed: #{@new}"
+	if new.length <= 0
+		@error = "Type text"
+		return erb :newposts
+	end
+	erb "You Typed: #{new}"
 end
