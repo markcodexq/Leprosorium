@@ -34,6 +34,7 @@ get '/' do
 end
 
 get '/posts' do
+	@result = @db.execute 'Select * from Posts'
 	erb :posts
 end
 
@@ -48,5 +49,11 @@ post '/new_posts' do
 		@error = "Type text"
 		return erb :newposts
 	end
+# Сохранение данных в БД
+	@db.execute 'insert into posts
+	(content, created_date) 
+	
+	values(?, datetime());', [new]
+	
 	erb "You Typed: #{new}"
 end
