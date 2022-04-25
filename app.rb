@@ -27,6 +27,14 @@ configure do
 		"created_date" Date,
 		"content" Text 
 	)'
+	@db.execute 'CREATE TABLE IF NOT EXISTS 
+	Comments
+	(
+		"id" Integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+		"created_date" Date,
+		"content" Text,
+		"post_id" Integer 
+	)'
 end
 
 get '/' do
@@ -57,12 +65,22 @@ post '/new_posts' do
 	redirect to '/posts'
 end
 
-get '/posts/:post_id' do
+get '/details/:post_id' do
 	# получаем переменную из URL
 	post_id = params[:post_id]
 	# Получаем один пост с помощью id
-	details = @db.execute 'Select * from Posts WHERE id=?', [post_id]
+	get_post = @db.execute 'Select * from Posts WHERE id=?', [post_id]
 	# В массиве который получили выбираем первый элемент с хешем
-	@row = details[0]
+	@row = get_post[0]
 	erb :details
+end
+
+# Обработчик POST запроса /posts/....
+# Браузер отправляет данные мы их принимаем
+
+post '/details/:post_id' do
+	post_id = params[:post_id]
+	content = params[:details_comments]
+	@db.execute ''
+	erb "You Typed #{content} from #{post_id}"
 end
