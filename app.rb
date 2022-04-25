@@ -72,6 +72,8 @@ get '/details/:post_id' do
 	get_post = @db.execute 'Select * from Posts WHERE id=?', [post_id]
 	# В массиве который получили выбираем первый элемент с хешем
 	@row = get_post[0]
+
+	@get_comments = @db.execute 'Select * from Comments WHERE post_id=? order by id', [post_id]
 	erb :details
 end
 

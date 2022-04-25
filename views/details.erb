@@ -16,3 +16,11 @@
   <br>
   <button type="submit" class="btn btn-primary">Add comment</button>
 </form>
+<br>
+<p>
+    <% @get_comments.each do |comment|%>
+        <%=comment['content']%>
+        <br>
+        <%=comment['created_date']%>
+    <%end%>
+</p>
